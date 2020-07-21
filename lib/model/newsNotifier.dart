@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutterapp/model/news.dart';
+import 'package:flutter_app/model/news.dart';
 
 // следим за состоянием списков новостей.
 class NewsNotifier with ChangeNotifier {

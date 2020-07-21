@@ -1,5 +1,5 @@
-import 'package:flutterapp/model/news.dart';
-import 'package:flutterapp/model/newsNotifier.dart';
+import 'package:flutter_app/model/news.dart';
+import 'package:flutter_app/model/newsNotifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart';
 import 'package:web_scraper/web_scraper.dart';

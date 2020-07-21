@@ -1,7 +1,7 @@
 // Виджет новостей
 import 'package:flutter/material.dart';
-import 'package:flutterapp/model/newsNotifier.dart';
-import 'package:flutterapp/model/service.dart';
+import 'package:flutter_app/model/newsNotifier.dart';
+import 'package:flutter_app/model/service.dart';
 import 'package:provider/provider.dart';
 
 class MyList extends StatelessWidget {

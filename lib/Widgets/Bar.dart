@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/model/newsNotifier.dart';
+import 'package:flutter_app/model/newsNotifier.dart';
 import 'package:provider/provider.dart';
 
 class MyBarr extends StatelessWidget {
