@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterapp/Screen/newsbody.dart';
-import 'package:flutterapp/Widgets/Bar.dart';
-import 'package:flutterapp/Widgets/NewsWidget.dart';
-import 'package:flutterapp/model/newsNotifier.dart';
-import 'package:flutterapp/model/service.dart';
+import 'package:flutter_app/Screen/newsbody.dart';
+import 'package:flutter_app/Widgets/Bar.dart';
+import 'package:flutter_app/Widgets/NewsWidget.dart';
+import 'package:flutter_app/model/newsNotifier.dart';
+import 'package:flutter_app/model/service.dart';
 import 'package:provider/provider.dart';
 import 'package:worker_manager/worker_manager.dart';
 
