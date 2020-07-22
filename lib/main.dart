@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:worker_manager/worker_manager.dart';
-import 'model/service.dart';
 import 'Widgets/Bar.dart';
 import 'Widgets/NewsWidget.dart';
 import 'model/newsNotifier.dart';
@@ -56,7 +55,8 @@ class StartupCaller extends StatelessWidget {
   Widget build(BuildContext context) {
     return StatefulWrapper(
       onInit: () {
-        NewsService(context.read<NewsNotifier>()).initNews();
+        // NewsService(context.read<NewsNotifier>()).initNews();
+        context.read<NewsNotifier>().initNews();
       },
       child: MyApp(),
     );

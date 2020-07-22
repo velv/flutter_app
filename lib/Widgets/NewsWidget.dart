@@ -1,7 +1,6 @@
 // Виджет новостей
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/newsNotifier.dart';
-import 'package:flutter_app/model/service.dart';
 import 'package:provider/provider.dart';
 
 class MyList extends StatelessWidget {
@@ -16,9 +15,8 @@ class MyList extends StatelessWidget {
       itemBuilder: (BuildContext context, int newsCount) {
         if (newsCount == newsNotifier.getNewsList().length)
           return RaisedButton(
-            onPressed: NewsService(newsNotifier).moreNews,
-            child:
-                const Text('Больше новостей', style: TextStyle(fontSize: 15)),
+            onPressed: context.read<NewsNotifier>().moreNews,
+            child: const Text('Больше новостей', style: TextStyle(fontSize: 15)),
           );
         return Dismissible(
           key: UniqueKey(),
