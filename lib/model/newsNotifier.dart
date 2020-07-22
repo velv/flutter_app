@@ -9,7 +9,7 @@ import 'service.dart';
 class NewsNotifier with ChangeNotifier {
   final box = GetStorage();
   List<News> _newsList = [];
-  List<dynamic> filterList = ['first'];
+  List<dynamic> filterList = [];
   int countNews;
   int selectedIndex;
   addNewsToList(News news) {
@@ -25,7 +25,6 @@ class NewsNotifier with ChangeNotifier {
   removeNews(int index) {
     filterList.add(_newsList[index].newsUrl);
     box.write('filter', filterList);
-    //box.save();
     print(box.read('filter'));
     _newsList.removeAt(index);
     notifyListeners();
@@ -49,8 +48,13 @@ class NewsNotifier with ChangeNotifier {
     countNews = 1;
     Executor().execute(arg1: countNews, fun1: NewsService.getMoeNews).then((result) {
       print(result.length);
-      List<News> itOg = filterMyList(result, filterList);
-      setNewsList(itOg);
+      if (filterList != null) {
+        print(filterList);
+        List<News> itOg = filterMyList(result, filterList);
+        setNewsList(itOg);
+      } else {
+        setNewsList(result);
+      }
       //  print(box.read('filter'));
     });
     //Future.delayed(Duration(seconds: 5)).then((_) {
@@ -63,8 +67,15 @@ class NewsNotifier with ChangeNotifier {
     countNews++;
     Executor().execute(arg1: countNews, fun1: NewsService.getMoeNews).then((result) {
       print(result.length);
-      globalNews = [...getNewsList(), ...result];
-      setNewsList(globalNews);
+      if (filterList != null) {
+        print(filterList);
+        List<News> itOg = filterMyList(result, filterList);
+        globalNews = [...getNewsList(), ...itOg];
+        setNewsList(globalNews);
+      } else {
+        globalNews = [...getNewsList(), ...result];
+        setNewsList(globalNews);
+      }
     });
   }
 
