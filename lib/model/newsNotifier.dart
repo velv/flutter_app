@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:get_storage/get_storage.dart';
 import 'package:flutter_app/model/news.dart';
 import 'package:worker_manager/worker_manager.dart';
 
@@ -7,7 +7,9 @@ import 'service.dart';
 
 // следим за состоянием списков новостей.
 class NewsNotifier with ChangeNotifier {
+  final box = GetStorage();
   List<News> _newsList = [];
+  List<dynamic> filterList = ['first'];
   int countNews;
   int selectedIndex;
   addNewsToList(News news) {
@@ -21,6 +23,10 @@ class NewsNotifier with ChangeNotifier {
   }
 
   removeNews(int index) {
+    filterList.add(_newsList[index].newsUrl);
+    box.write('filter', filterList);
+    //box.save();
+    print(box.read('filter'));
     _newsList.removeAt(index);
     notifyListeners();
   }
@@ -37,11 +43,15 @@ class NewsNotifier with ChangeNotifier {
 
   // Парсим первые 12 новостей при запуске приложения
   initNews() {
+    if (box.read('filter') != null) filterList = box.read('filter');
+    print(filterList);
     selectedIndex = 0;
     countNews = 1;
     Executor().execute(arg1: countNews, fun1: NewsService.getMoeNews).then((result) {
       print(result.length);
-      setNewsList(result);
+      List<News> itOg = filterMyList(result, filterList);
+      setNewsList(itOg);
+      //  print(box.read('filter'));
     });
     //Future.delayed(Duration(seconds: 5)).then((_) {
     //здесь
@@ -56,5 +66,12 @@ class NewsNotifier with ChangeNotifier {
       globalNews = [...getNewsList(), ...result];
       setNewsList(globalNews);
     });
+  }
+
+  List<News> filterMyList(List<News> mynews, List<dynamic> list) {
+    for (int i = 0; i < list.length; i++) {
+      mynews.removeWhere((element) => element.newsUrl == list[i]);
+    }
+    return mynews;
   }
 }

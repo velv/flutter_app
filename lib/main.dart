@@ -6,9 +6,11 @@ import 'Widgets/Bar.dart';
 import 'Widgets/NewsWidget.dart';
 import 'model/newsNotifier.dart';
 import 'Screen/newsbody.dart';
+import 'package:get_storage/get_storage.dart';
 
 // тест
 void main() async {
+  await GetStorage.init();
   await Executor().warmUp(log: true);
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -55,7 +57,6 @@ class StartupCaller extends StatelessWidget {
   Widget build(BuildContext context) {
     return StatefulWrapper(
       onInit: () {
-        // NewsService(context.read<NewsNotifier>()).initNews();
         context.read<NewsNotifier>().initNews();
       },
       child: MyApp(),

@@ -1,13 +1,11 @@
 import 'package:flutter_app/model/news.dart';
-import 'package:flutter_app/model/newsNotifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart';
 import 'package:web_scraper/web_scraper.dart';
 
 // Основная логика, парсим сайты.
 class NewsService {
-  NewsNotifier nn;
-  NewsService(this.nn);
+  NewsService();
   //  Парсим новости с сайта  газеты МОЕ
   static Future<List<News>> getMoeNews(int count) async {
     print('parsim infu s saita');
@@ -39,7 +37,6 @@ class NewsService {
       }
     }
     print('zakonchili s parsingom');
-
     return moeNewsList;
   }
   //////////end
