@@ -16,8 +16,6 @@ class NewsService {
     List<News> moeNewsList = [];
     // Временные списки
     List<Map<String, dynamic>> _linksAndTitles, _pictures = [];
-    // Временный список, который хранит тело новости
-    //   List<dynamic> _bodyList = [];
     final String moeUrl = 'https://moe-online.ru';
     final webScraper = WebScraper(moeUrl);
     //========================
@@ -31,11 +29,6 @@ class NewsService {
           //получаем нормальную ссылку на картинку для новости
           fullPictureUrl = _pictures[i]['attributes']['style'].substring(22, _pictures[i]['attributes']['style'].length - 2);
           //==========================================
-          //   final response = await http.Client().get(Uri.parse(fullUrl));
-          //  var document = parse(response.body);
-          //      if (response.statusCode == 200) {
-          //         _bodyList = document.getElementsByClassName("app_in_text").elementAt(0).querySelectorAll("p").toList();
-          //     }
           // Формируем список новостей с сайта (каждая новость включает заголовок, ссылки на картинку и тело новости)
           moeNewsList.add(News.fromMap(data: _linksAndTitles, index: i, url: fullUrl, picture: fullPictureUrl));
         }

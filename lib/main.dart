@@ -83,20 +83,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  /* MyHomePage({Key key}) : super(key: key);
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  void initState() {
-    print('init state');
-    // инициализация
-    NewsService(context.read<NewsNotifier>()).initNews();
-    super.initState();
-  }
-*/
   @override
   Widget build(BuildContext context) {
     print('build main ');
