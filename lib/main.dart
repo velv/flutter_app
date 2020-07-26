@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:worker_manager/worker_manager.dart';
 import 'Widgets/Bar.dart';
 import 'Widgets/NewsWidget.dart';
 import 'model/newsNotifier.dart';
@@ -10,9 +9,9 @@ import 'package:get_storage/get_storage.dart';
 
 // тест
 void main() async {
-  await GetStorage.init();
-  await Executor().warmUp(log: true);
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then((_) {

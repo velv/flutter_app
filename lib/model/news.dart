@@ -6,12 +6,7 @@ class News {
 
   News();
 
-  News.fromMap(
-      [List<Map<String, dynamic>> data,
-      int index,
-      List<dynamic> list,
-      String url,
-      String picture]) {
+  News.fromMap({List<Map<String, dynamic>> data, int index, List<dynamic> list, String url, String picture}) {
     this.title = data[index]['title'];
     this.desc = list;
     this.newsUrl = url;

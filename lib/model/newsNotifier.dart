@@ -1,19 +1,31 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_app/model/news.dart';
-import 'package:worker_manager/worker_manager.dart';
 
 import 'service.dart';
 
 // следим за состоянием списков новостей.
 class NewsNotifier with ChangeNotifier {
   final box = GetStorage();
+  bool _isLoading;
   List<News> _newsList = [];
   List<dynamic> filterList = [];
   int countNews;
   int selectedIndex;
   addNewsToList(News news) {
     _newsList.add(news);
+    notifyListeners();
+  }
+
+  bool get isLoading => _isLoading;
+  setIsLoading(bool load) {
+    _isLoading = load;
+  }
+
+  setNewsBody(List<dynamic> body, newsIndex) {
+    _newsList[newsIndex].desc = body;
+    _isLoading = false;
     notifyListeners();
   }
 
@@ -46,7 +58,7 @@ class NewsNotifier with ChangeNotifier {
     print(filterList);
     selectedIndex = 0;
     countNews = 1;
-    Executor().execute(arg1: countNews, fun1: NewsService.getMoeNews).then((result) {
+    compute(NewsService.getMoeNews, countNews).then((result) {
       print(result.length);
       if (filterList != null) {
         print(filterList);
@@ -65,7 +77,7 @@ class NewsNotifier with ChangeNotifier {
   moreNews() {
     List<News> globalNews = [];
     countNews++;
-    Executor().execute(arg1: countNews, fun1: NewsService.getMoeNews).then((result) {
+    compute(NewsService.getMoeNews, countNews).then((result) {
       print(result.length);
       if (filterList != null) {
         print(filterList);
